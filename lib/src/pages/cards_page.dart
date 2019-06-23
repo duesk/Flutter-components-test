@@ -24,6 +24,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardTipo1() {
     return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -32,7 +34,7 @@ class CardPage extends StatelessWidget {
             subtitle: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nibh urna, porttitor eget augue vel, pharetra dapibus enim. Ut sollicitudin interdum blandit. Sed malesuada nunc."),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
                 child: Text("Cancelar",style: TextStyle(color: Colors.red)),
@@ -54,9 +56,16 @@ class CardPage extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
-          Image(
+          FadeInImage(
             image: NetworkImage("https://astanatimes.com/wp-content/uploads/2018/01/Part_3.jpeg"),
+            placeholder: AssetImage("assets/jar-loading.gif"),
+            //fadeInDuration: Duration(milliseconds: 10),
+            height: 250.0,
+            fit: BoxFit.cover,
           ),
+          //Image(
+          //  image: NetworkImage("https://astanatimes.com/wp-content/uploads/2018/01/Part_3.jpeg"),
+          //),
           Container(
             padding: EdgeInsets.all(10.0),
             child: Text("texto de image")
