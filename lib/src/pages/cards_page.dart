@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CardPage extends StatelessWidget {
 
   @override
@@ -53,7 +52,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardTipo2(){
     
-    return Card(
+    final card =  Container(
+      //clipBehavior: Clip.antiAlias,
       child: Column(
         children: <Widget>[
           FadeInImage(
@@ -73,6 +73,23 @@ class CardPage extends StatelessWidget {
         ],
       ),
     );
-
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10.0,
+            spreadRadius: 10.0,
+            offset: Offset(0.0, 19)
+          )
+        ],
+        borderRadius: BorderRadius.circular(20.0),
+        color: Colors.white
+      ),
+      child: ClipRRect(
+        child: card,
+        borderRadius: BorderRadius.circular(20.0),        
+      ),
+    );
   }
 } 
