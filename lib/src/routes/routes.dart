@@ -1,6 +1,7 @@
 
 import 'package:components/src/pages/animated_cointaner.dart';
 import 'package:components/src/pages/cards_page.dart';
+import 'package:components/src/pages/input_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +17,8 @@ return <String, WidgetBuilder>{
   'alert': (BuildContext context) => AlertPage(),
   'avatar': (BuildContext context)=> AvatarPage(),
   'card': (BuildContext context) => CardPage(),
-  'animatedContainer': (BuildContext context) => AnimatedContainerPage()
+  'animatedContainer': (BuildContext context) => AnimatedContainerPage(),
+  'inputs': (BuildContext context) => InputPage()
 
 };
 
