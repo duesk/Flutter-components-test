@@ -11,6 +11,9 @@ class _InputPageState extends State<InputPage> {
   String _nombre =" ";
   String _email =" ";
   String _fecha = " ";
+  
+  String _estadoSeleccionado = "soltero";
+  List<String> _estadoCivil = ["soltero","casado","divorciado","viudo"];
 
   TextEditingController _dateSelectorController = TextEditingController();
 
@@ -20,7 +23,7 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar( 
         title: Text("Inputs") ),
         body: ListView(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           children: <Widget>[
             _crearInput(),
             Divider(),
@@ -30,10 +33,43 @@ class _InputPageState extends State<InputPage> {
             Divider(),
             _crearFecha(context),
             Divider(),
+            _crearDropDown(),
+            Divider(),
             _crearPersona(),
 
           ],
         ),
+    );
+  }
+
+  List<DropdownMenuItem<String>>getOpcionesDropdown() {
+
+    List<DropdownMenuItem<String>>lista = [];
+    _estadoCivil.forEach((estado){
+      lista.add(DropdownMenuItem(
+        child: Text(estado),
+        value: estado,
+      ));
+    });
+    return lista;
+
+  }
+
+  Widget _crearDropDown(){
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 10,),
+        DropdownButton(
+          value: _estadoSeleccionado,
+          items: getOpcionesDropdown(),
+          onChanged:(opt){
+            setState(() {
+              _estadoSeleccionado = opt;
+            });
+          } 
+        ),
+      ],
     );
   }
 
@@ -63,14 +99,14 @@ class _InputPageState extends State<InputPage> {
 
   Widget _crearPersona (){
     return ListTile(
-      title: Text('nombre es : $_nombre'),
+      title: Text('Nombre es : $_nombre'),
       subtitle: Text("Email: $_email"),
+      trailing: Text("Esatdo Civi: $_estadoSeleccionado"),
     );
   // return  Text('nombre es : $_nombre');  
   }
 
-  Widget _crearEmail()
-{
+  Widget _crearEmail(){
   return TextField(
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
@@ -135,21 +171,34 @@ Widget _crearFecha(BuildContext context){
     },
   );
 }
+
+
   _selectDate( BuildContext context) async {
+
     DateTime picked = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
-      initialDate: DateTime(2000),
-      lastDate: DateTime(2020)
+      initialDate: new DateTime.now(),
+      firstDate: new DateTime(2018),
+      lastDate: new DateTime(2020),
+      locale: Locale("es","ES") 
     );
     if( picked != null ){
       setState(() {
       _fecha = picked.toString();
-      _dateSelectorController.text = _fecha;
+      String _fechaFormat = _dateFormat(_fecha);
+      _dateSelectorController.text = _fechaFormat;
       
       });
     }
 
+  }
+
+  _dateFormat(String _fecha){
+    String formatText="";
+    for( var i=0 ; i <= 9; i++ ) { 
+      formatText= formatText + _fecha[i];
+    } 
+    return formatText;
   }
 
 
